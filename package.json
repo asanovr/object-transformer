@@ -1,0 +1,61 @@
+{
+  "name": "@asanovr/object-transformer",
+  "version": "1.0.0",
+  "description": "Modify the keys and values of an object",
+  "main": "dist/index.js",
+  "unpkg": "dist/index.umd.js",
+  "module": "dist/index.module.js",
+  "source": "src/index.ts",
+  "types": "index.d.ts",
+  "author": {
+    "name": "Asanov Ruslan",
+    "email": "bioforge91@gmail.com"
+  },
+  "license": "MIT",
+  "exports": "./index.js",
+  "engines": {
+    "node": ">=12"
+  },
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "prepublishOnly": "npm run build",
+    "test": "NODE_ENV=test jest --coverage"
+  },
+  "files": [
+    "src",
+    "dist",
+    "types.d.ts"
+  ],
+  "keywords": [
+    "object",
+    "assign",
+    "extend",
+    "properties",
+    "values",
+    "value",
+    "transform",
+    "transformation",
+    "modify"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && npm run test"
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-export-default-from": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "bundt": "^1.1.2",
+    "husky": "^4.3.6",
+    "jest": "^26.6.3",
+    "microbundle": "^0.14.1",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0"
+  }
+}
