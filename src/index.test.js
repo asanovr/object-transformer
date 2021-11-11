@@ -66,3 +66,19 @@ test('change very deep value', () => {
 
   expect(transformed.test.deepObject.value).toBe('DEEPOBJECTVALUE');
 });
+
+
+test('same as original', () => {
+  const object = {
+    name: 'Test',
+    test: {
+      deepObject: {
+        value: 'deepObjectValue'
+      }
+    }
+  };
+
+  const transformed = transform(object, value => value);
+
+  expect(transformed).toStrictEqual(object);
+});

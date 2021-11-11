@@ -1,6 +1,6 @@
 {
   "name": "@asanovr/object-transformer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Modify the keys and values of an object",
   "main": "dist/index.js",
   "unpkg": "dist/index.umd.js",

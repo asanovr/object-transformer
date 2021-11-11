@@ -12,6 +12,7 @@ export const transform = (object:Transformed, transformer: (value: any, key: str
   if (isObject(object)) {
     for (const [key, value] of Object.entries(object)) {
       const newValue = transformer(value, key, object);
+      newObject[key] = newValue;
 
       if (newValue !== value) {
         if (newValue !== undefined) {
