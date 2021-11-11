@@ -30,47 +30,46 @@ test('not an object', () => {
 
 test('delete value', () => {
   const object = {test: 1};
-  const transformed = transform(object, () => {
-    return undefined;
-  });
 
-  console.log(transformed);
+ transform(object, (value, key, object) => {
+   delete object[key];
+ });
 
-  expect(transformed.test).toBe(undefined);
+  expect(object.test).toBe(undefined);
 });
 
 test('change value', () => {
   const object = {test: 'test'};
-  const transformed = transform(object, value => value.toUpperCase());
+  transform(object, value => value.toUpperCase());
 
-  expect(transformed.test).toBe('TEST');
-});
-
-test('the original object should not change', () => {
-  const object = {test: 'test'};
-  const transformed = transform(object, value => value.toUpperCase());
-
-  expect(transformed.test).not.toBe(object.test);
+  expect(object.test).toBe('TEST');
 });
 
 test('change deep value', () => {
   const object = {test: {deepValue: 'test'}};
-  const transformed = transform(object, value => typeof value === 'string' ? value.toUpperCase() : value);
+  transform(object, value => typeof value === 'string' ? value.toUpperCase() : value);
 
-  expect(transformed.test.deepValue).toBe('TEST');
+  expect(object.test.deepValue).toBe('TEST');
 });
 
 test('change very deep value', () => {
   const object = {test: {deepObject: {value: 'deepObjectValue'}}};
-  const transformed = transform(object, value => typeof value === 'string' ? value.toUpperCase() : value);
+  transform(object, value => typeof value === 'string' ? value.toUpperCase() : value);
 
-  expect(transformed.test.deepObject.value).toBe('DEEPOBJECTVALUE');
+  expect(object.test.deepObject.value).toBe('DEEPOBJECTVALUE');
 });
 
 
 test('same as original', () => {
   const object = {
     name: 'Test',
+    date: new Date,
+    blob: new Blob(),
+    arrayOfObjects: [
+      {name: 'Test'},
+      {name: 'Test'},
+      {name: 'Test'},
+    ],
     test: {
       deepObject: {
         value: 'deepObjectValue'
@@ -78,7 +77,11 @@ test('same as original', () => {
     }
   };
 
-  const transformed = transform(object, value => value);
+  const simpleClone = {
+    ...object
+  }
 
-  expect(transformed).toStrictEqual(object);
+  transform({...object}, value => value);
+
+  expect(simpleClone).toStrictEqual(object);
 });
