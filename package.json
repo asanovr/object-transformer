@@ -9,7 +9,6 @@
   "types": "index.d.ts",
   "author": "Asanov Ruslan <bioforge91@gmail.com>",
   "license": "MIT",
-  "exports": "./index.js",
   "engines": {
     "node": ">=12"
   },
